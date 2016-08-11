@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Finanzas" Class="DatabaseContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=SQLDEVMTY5;Initial Catalog=Finanzas;Persist Security Info=True;User ID=dtsmgr" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FinanzasConnectionString1" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.spSelEntidad" Method="spSelEntidad">
+    <ElementType Name="spSelEntidadResult">
+      <Column Name="TABLE_NAME" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="TABLE_SCHEMA" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="ORDINAL_POSITION" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="COLUMN_NAME" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="DATA_TYPE" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="CHARACTER_MAXIMUM_LENGTH" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IS_NULLABLE" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spPrcGeneraReporte" Method="spPrcGeneraReporte">
+    <Parameter Name="XMLDiagram" Parameter="xMLDiagram" Type="System.Xml.Linq.XElement" DbType="Xml" />
+    <Parameter Name="Top" Parameter="top" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="EnXML" Parameter="enXML" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="spPrcGeneraReporteResult">
+      <Column Name="JsonModel" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

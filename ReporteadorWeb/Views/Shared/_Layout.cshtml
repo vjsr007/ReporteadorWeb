@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Reporteador Web</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <link href="~/Content/contextmenu.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Reportador Web", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+    <script>
+        var webroot = "@Url.Content("~")";
+    </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/Libs/jquery/jquery-ui-1.12.0.js"></script>
+    <script src="~/Scripts/Libs/jquery/jquery.blockUI.js"></script>
+    <script src="~/Scripts/Libs/jquery/jquery.jqGrid.js"></script>
+    <script src="~/Scripts/Libs/i18n/grid.locale-es.js"></script>
+    <script src="~/Scripts/Libs/i18n/jquery.ui.datepicker-es.js"></script>
+    <script src="~/Scripts/Libs/otros/underscore.min.js"></script>
+
+    <script src="~/Scripts/Libs/Draw2D/shifty.js"></script>
+    <script src="~/Scripts/Libs/Draw2D/raphael.js"></script>
+    <script src="~/Scripts/Libs/jquery/jquery.autoresize.js"></script>
+    <script src="~/Scripts/Libs/jquery/jquery-touch_punch.js"></script>
+    <script src="~/Scripts/Libs/jquery/jquery.contextmenu.js"></script>
+    <script src="~/Scripts/Libs/Draw2D/rgbcolor.js"></script>
+    <script src="~/Scripts/Libs/Draw2D/canvg.js"></script>
+    <script src="~/Scripts/Libs/Draw2D/Class.js"></script>
+    <script src="~/Scripts/Libs/otros/json2.js"></script>
+    <script src="~/Scripts/Libs/otros/pathfinding-browser.min.js"></script>
+
+
+    <script src="~/Scripts/Libs/Draw2D/draw2d.js"></script>
+
+    <script src="~/Scripts/Libs/jquery/jquery.browser.js"></script>
+
+    <script src="~/Scripts/Libs/Draw2D/Application.js"></script>
+    <script src="~/Scripts/Libs/Draw2D/View.js"></script>
+    <script src="~/Scripts/Libs/Draw2D/Toolbar.js"></script>
+    <script src="~/Scripts/Libs/Draw2D/TableShape.js"></script>
+    <script src="~/Scripts/Libs/otros/base64js.min.js"></script>
+    <script src="~/Scripts/Utils.js"></script>
+    <script src="~/Scripts/App.js"></script>
+    <script src="~/Scripts/DiagramarER.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

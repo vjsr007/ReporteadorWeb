@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@section scripts {
+    <script src="~/Scripts/Views/Home/Index.js"></script>
+}
+<form id="frmReporteador" method="post" enctype="multipart/form-data">
+    <div id="tabs" style="width: 100%">
+        <ul>
+            <li><a id="tabdiagram" href="#lydiagram">Diagram</a></li>
+            <li><a id="tabdatos" href="#lygrid">Data</a></li>
+        </ul>
+        <div id="lydiagram">
+            <div id="side-nav">
+                <div id="lyrControls">
+                    <label for="cmbShema">Schema:</label>
+                    <select id="cmbSchema">
+                        <option>[All]</option>
+                        <option>dbo</option>
+                    </select>
+                    <label for="txtFilter">Entity:</label>
+                    <input type="text" id="txtFilter /">
+                </div>
+                <div id="lyrEntities">
+
+                </div>
+            </div>
+            <div id="toolbar">
+
+            </div>
+            <div id="canvas" style="height: 460px; position:relative;">
+
+            </div>
+        </div>
+        <div id="lygrid">
+            <table id="grid" style="width: 100%"></table>
+            <div id="pager" style="text-align: center;">
+            </div>
+        </div>
+    </div>
+</form>
