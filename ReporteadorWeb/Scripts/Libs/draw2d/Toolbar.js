@@ -66,7 +66,7 @@ example.Toolbar = Class.extend({
 		this.SaveButton = $("<button type='button' id='btnSave' class='gray'><i class='fa fa-save' aria-hidden='true'></button>");
 		this.html.append(this.SaveButton);
 
-		this.TopCombo = $("<div><label type='button' for='cmbTop'>Rows:</label><select id='cmbTop'><option value='10'>10 rows</option><option value='50'>50 rows</option></select><div>");
+		this.TopCombo = $("<div><label type='button' for='cmbTop'>Rows:</label><select id='cmbTop'><option value='10'>10 rows</option><option value='50'>50 rows</option><option value='100'>100 rows</option><option value='1000'>1,000 rows</option><option value='10000'>10,000 rows</option><option value='100000'>100,000 rows</option></select><div>");
 		this.html.append(this.TopCombo);
 		
         this.disableButton(this.undoButton, true);

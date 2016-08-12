@@ -31,7 +31,7 @@ namespace Reporteador.Controllers
         {
 
             DatabaseAdoNet ado = new DatabaseAdoNet();
-            var sql = "SELECT '[' + TABLE_NAME + ']'  AS  TABLE_NAME,TABLE_SCHEMA,ORDINAL_POSITION, '[' + COLUMN_NAME + ']'  AS  COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS";
+            var sql = "SELECT '[' + LOWER(TABLE_NAME) + ']'  AS  TABLE_NAME,LOWER(TABLE_SCHEMA) AS TABLE_SCHEMA,ORDINAL_POSITION, '[' + LOWER(COLUMN_NAME) + ']'  AS  COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS";
 
             var json = ado.ExecQuery(sql).AsEnumerable().Select(s => new {
                 TABLE_NAME = s["TABLE_NAME"],
@@ -104,7 +104,7 @@ namespace Reporteador.Controllers
         }
 
         [ErrorHandlerJson]
-        public JsonResult EjecutarConsulta(EntityER[] entities)
+        public JsonResult EjecutarConsulta(EntityER[] entities, int? rows)
         {
             var Entidades = entities.Where(e => e.type == "TableShape").ToList();
             var Joins = entities.Where(e => e.type == "draw2d.Connection").ToList();
@@ -112,7 +112,7 @@ namespace Reporteador.Controllers
 
             SelectQueryBuilder query = new SelectQueryBuilder();
 
-            query.TopRecords = 50;
+            query.TopRecords = Convert.ToInt32(rows==null?50: rows);
 
             query.SelectFromTable(Entidades.Select(e => e.name).FirstOrDefault().ToString());
 

@@ -41,7 +41,7 @@
         }
     }
 
-    var crearSidemenu = function (Tablas) {
+    self.crearSidemenu = function (Tablas) {
         var tablas = _.sortBy(_.unique(_.map(Tablas, function (t) {
             return '{0}.{1}'.format(t.TABLE_SCHEMA, t.TABLE_NAME)
         }))) || new Array;
@@ -50,8 +50,9 @@
                     ' class="palette_node_element draw2d_droppable' +
                     ' ui-draggable" title="Arrastrar y soltar" style="z-index: 1;">{0}</div>';
 
+        controls.lyrEntities.html('');
         tablas.forEach(function (t) {
-            controls.lyrEntities.append(html.format(t));
+            controls.lyrEntities.append(html.format($.trim(t).toLowerCase()));
         });
     }
 
@@ -64,7 +65,7 @@
         self.tablas = params.entities.tablas;
 
         //Se crea antes para que enlace eventos de drop&drag
-        crearSidemenu(params.entities.tablas);
+        self.crearSidemenu(params.entities.tablas);
 
         routerToUse = new draw2d.layout.connection.InteractiveManhattanConnectionRouter();
 
@@ -89,7 +90,7 @@
         
     };
 
-    self.run = function (callBack) {
+    self.run = function (rows, callBack) {
         var entities = new Array;
 
         self.datos.entidades.forEach(function (e) {
@@ -103,12 +104,18 @@
                 targetNode: e.target ? e.target.node : null,
                 targetPort: e.target ? e.target.port : null,
                 sourceNode: e.source ? e.source.node : null,
-                sourcePort: e.source ? e.source.port : null,
+                sourcePort: e.source ? e.source.port : null
             }
 
             entities.push(entity);
         });
-        Utils.ejecutarAjax(entities, url.run, 'post', function (data) {
+
+        var post = {
+            entities: entities,
+            rows: rows,
+        }
+
+        Utils.ejecutarAjax(post, url.run, 'post', function (data) {
             if (callBack) callBack(data);
         });
     }

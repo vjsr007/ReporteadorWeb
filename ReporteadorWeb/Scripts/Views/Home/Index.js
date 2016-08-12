@@ -12,6 +12,10 @@
         get pager() { return $form('#pager') },
         get tabs() { return $form('#tabs') },
         get btnRun() { return $form('#btnRun') },
+        get cmbTop() { return $form('#cmbTop') },
+        get cmbShema() { return $form('#cmbSchema') },
+        get txtFilter() { return $form('#txtFilter') },
+        get dataShape() { return $form('[data-shape="TableShape"]') },
     }
 
     var imageFormat = function (cellvalue, options, rowObject) {
@@ -233,9 +237,31 @@
     var eventos = function () {
 
         controls.btnRun.click(function (e) {
-            DiagramaER.run(configurarGrid);
+            DiagramaER.run(parseInt(controls.cmbTop.val()),configurarGrid);
         });
 
+
+        controls.cmbShema.change(function () {
+
+            if (controls.cmbShema.val() != "") {
+                controls.dataShape.hide();
+                $('[data-entity^="{0}."]'.format($.trim(controls.cmbShema.val()).toLowerCase())).show();
+            }
+            else {
+                controls.dataShape.show();
+            }
+        });
+
+        controls.txtFilter.keyup(function () {
+            if (controls.txtFilter.val() != "") {
+                controls.dataShape.hide();
+                $('[data-entity*="{0}"]'.format($.trim(controls.txtFilter.val()).toLowerCase())).show();
+            }
+            else {
+                controls.dataShape.show();
+            }
+
+        });
     }
 
     $(init);
