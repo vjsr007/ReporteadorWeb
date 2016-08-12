@@ -129,36 +129,19 @@
      * @param {draw2d.shape.basic.Label} label the label to edit
      */
     draw2d.ui.LabelEditor.prototype.start = function (label) {
+        return false;
+
         var config = this.configuration;
-        Utils.mostrarModal(
-            "Selecciona campo",
-            url.dialogEditarCampos, {},
-            {
-                width: 550,
-                buttons: {}
-            },
-            function (dialog) {
-                //Pasar el Dialog a la PartialView
-                Home.dialogEditarCampos.Modal = dialog;
+        var newText = prompt(this.configuration.text, label.getText());
+        if (newText) {
+            var cmd = new draw2d.command.CommandAttr(label, { text: newText });
+            label.getCanvas().getCommandStack().execute(cmd);
 
-                //Ejecutar al crear o modificar;
-                Home.dialogEditarCampos.Success = function (newText) {
-                    //var newText = prompt(this.configuration.text, label.getText());
-                    if (newText) {
-                        var cmd = new draw2d.command.CommandAttr(label, { text: newText });
-                        label.getCanvas().getCommandStack().execute(cmd);
-
-                        config.onCommit(label.getText());
-                    }
-                    else {
-                        config.onCancel();
-                    }
-                }
-
-                //Ejecutar función para dibujar botones de dialog
-                Home.dialogEditarCampos.renderButtons();
-            }
-        );
+            config.onCommit(label.getText());
+        }
+        else {
+            config.onCancel();
+        }
     }
 
 })(DiagramaER);

@@ -29,6 +29,10 @@ TableShape = draw2d.shape.layout.VerticalLayout.extend({
         this.userData.columns = data;
     },
      
+    url: {
+        get run() { return "{0}Home/EjecutarConsulta".format(webroot); },
+        get dialogEditarCampos() { return "{0}Home/dialogEditarCampos".format(webroot); },
+    },
  
     /**
      * @method
@@ -68,20 +72,34 @@ TableShape = draw2d.shape.layout.VerticalLayout.extend({
                  callback: $.proxy(function(key, options) 
                  {
                     switch(key){
-                    case "rename":
-                        setTimeout(function(){
-                            emitter.onDoubleClick();
-                        },10);
-                        break;
-                    case "new":
-                        setTimeout(function(){
-                            _table.addEntity("_new_").onDoubleClick();
-                        },10);
-                        break;
-                    case "delete":
-                        // with undo/redo support
-                        var cmd = new draw2d.command.CommandDelete(emitter);
-                        emitter.getCanvas().getCommandStack().execute(cmd);
+                        //case "rename":
+                        //    setTimeout(function () {
+                        //        emitter.onDoubleClick();
+                        //    }, 10);
+                        //    break;
+                        case "edit":
+                            Utils.mostrarModal(
+                                "Selecciona campo",
+                                _table.url.dialogEditarCampos,
+                                {},
+                                {
+                                    width: 300,
+                                    buttons: {}
+                                },
+                                function (dialog) {
+                                    //Ejecutar función para dibujar botones de dialog
+                                    Home.dialogEditarCampos.initialize(dialog, label, function (text) {
+                                        _table.addEntity(text).onDoubleClick();
+                                    });
+                                }
+                            );
+
+                            break;
+
+                        case "delete":
+                            // with undo/redo support
+                            var cmd = new draw2d.command.CommandDelete(emitter);
+                            emitter.getCanvas().getCommandStack().execute(cmd);
                     default:
                         break;
                     }
@@ -91,10 +109,9 @@ TableShape = draw2d.shape.layout.VerticalLayout.extend({
                  y:event.y,
                  items: 
                  {
-                     "rename": {name: "Rename"},
-                     "new":    {name: "New Entity"},
+                     "edit": {name: '<i class="fa fa-edit" aria-hidden="true"> Edit</i>'},
                      "sep1":   "---------",
-                     "delete": {name: "Delete"}
+                     "delete": {name: '<i class="fa fa-trash" aria-hidden="true"> Delete</i>'}
                  }
              });
          });
